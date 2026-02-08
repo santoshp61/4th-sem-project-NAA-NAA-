@@ -3,6 +3,9 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 
+import productRoutes from "./routes/productRoutes.js";
+
+app.use("/api/products", productRoutes);
 const app = express();
 
 // Middleware
@@ -13,7 +16,7 @@ app.use(express.json());
 
 // Test Route
 app.get("/", (req, res) => {
-    res.send("E-commerce backend is running 🚀");
+    res.send("E-commerce backend is running ");
 });
 
 // Port
