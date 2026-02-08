@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
 import axios from "axios";
+
 
 function App() {
   const [message, setMessage] = useState("");
@@ -15,6 +18,15 @@ function App() {
       });
   }, []);
 
+  function App() {
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
+    );
+  }
   return (
     <div style={{ padding: "40px", fontSize: "20px" }}>
       <h1>React → Node Connection Test</h1>
