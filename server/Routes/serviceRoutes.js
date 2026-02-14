@@ -8,7 +8,7 @@ const {
     createService,
     updateService,
     deleteService,
-} = require("../controllers/serviceController");
+} = require("../Controllers/serviceController");
 
 // Import our Gatekeeper (Middleware)
 const auth = require("../middleware/auth");
