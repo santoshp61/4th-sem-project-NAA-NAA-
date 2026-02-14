@@ -8,7 +8,7 @@ const {
     verifyUser,
     getPendingServices,
     verifyService
-} = require('../controllers/adminController');
+} = require('../Controllers/adminController');
 
 // Simple check for admin session
 const requireAdmin = (req, res, next) => {

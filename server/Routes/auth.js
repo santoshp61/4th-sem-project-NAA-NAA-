@@ -4,7 +4,7 @@ const multer = require('multer');
 const path = require('path');
 
 // Import the logic from our controller
-const { register, login, logout, updateUserProfile } = require('../controllers/authController');
+const { register, login, logout, updateUserProfile } = require('../Controllers/authController');
 
 // Import our Gatekeeper (Middleware)
 const authMiddleware = require('../middleware/auth');
