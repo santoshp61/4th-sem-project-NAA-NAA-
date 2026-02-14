@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { loginOwner } from "../API/OwnerApi.js";
+/*import { loginOwner } from "../API/OwnerApi.js";*/
 
 export default function OwnerLogic() {
     const [Email, setUsername] = useState("santoshpakhrin61@gmail.com");

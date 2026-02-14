@@ -1,73 +1,102 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import ProtectedRoute from "./components/ProtectedRoute";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import LandingPage from "./pages/LandingPage";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import About from "./pages/About";
-import HowItWorks from "./pages/HowItWorks";
-import PostService from "./pages/PostService";
-import Profile from "./pages/Profile";
-import MyServices from "./pages/MyServices";
-import ServiceDetails from "./pages/ServiceDetails";
-import Messages from "./pages/Messages";
-import AdminLogin from "./pages/AdminLogin";
-import AdminDashboard from "./pages/AdminDashboard";
+import Navbar from "./Components/Navbar";
+import HeroSection from "./Components/HeroSection";
+import FirstSection from "./Components/FirstSection";
+import Footer from "./Components/FooterSection";
+import WomensPage from "./Components/WomensPage";
+import MensPage from "./Components/MensPage";
+import AccessoriesPage from "./Components/AccessoriesPage";
+import SalesPage from "./Components/SalesPage";
+import AboutUs from "./Components/AboutUs";
+import Services from "./Components/Services";
+import Contact from "./Components/Contact";
+import Login from "./Components/Login";
+import Cart from "./Components/Cart";
+import OrderPanel from "./Components/OrderPanel";
+import SignUp from "./Components/SignUp";
+import OwnerPanel from "./Components/OwnerPanel";
+import OwnerLogin from "./Components/OwnerLogin";
+/*import OrderManagement from "./Components/OwnerPage/OrderManagement"; 
+import ProductManagement from "./Components/OwnerPage/ProductManagement";
+import UserDetails from "./Components/OwnerPage/UserDetails";
+import TotalRevenue from "./Components/OwnerPage/TotalRevinue";*/
+import PrivateRoute from "./Components/PrivateRoute";
 
-function App() {
+/* 🔹 Backend URL */
+axios.defaults.baseURL = "http://localhost:5000";
+
+const App = () => {
+  const [user, setUser] = useState(null);
+
+  /* 🔹 Check login from localStorage */
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setUser({ loggedIn: true });
+    }
+  }, []);
+
   return (
-    <>
-      <Navbar />
-      <div className="pt-20">
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/how-it-works" element={<HowItWorks />} />
-          <Route path="/service/:id" element={<ServiceDetails />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+    <BrowserRouter>
+      <Navbar user={user} />
 
-          <Route path="/admin-login" element={<AdminLogin />} />
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <HeroSection />
+              <FirstSection />
+            </>
+          }
+        />
 
-          <Route
-            path="/messages"
-            element={
-              <ProtectedRoute>
-                <Messages />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/post-service"
-            element={
-              <ProtectedRoute>
-                <PostService />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/my-services"
-            element={
-              <ProtectedRoute>
-                <MyServices />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </div>
-    </>
+        <Route path="/womens" element={<WomensPage />} />
+        <Route path="/mens" element={<MensPage />} />
+        <Route path="/accessories" element={<AccessoriesPage />} />
+        <Route path="/sale" element={<SalesPage />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/contact" element={<Contact />} />
+
+        {/* LOGIN */}
+        <Route path="/login" element={<Login setUser={setUser} />} />
+        <Route path="/signup" element={<SignUp />} />
+
+        {/* PROTECTED USER ROUTES */}
+        <Route
+          path="/cart"
+          element={
+            <PrivateRoute>
+              <Cart />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/order"
+          element={
+            <PrivateRoute>
+              <OrderPanel />
+            </PrivateRoute>
+          }
+        />
+
+        {/* OWNER */}
+        <Route path="/owner-login" element={<OwnerLogin />} />
+        <Route path="/owner" element={<OwnerPanel />} />
+        <Route path="/owner/orders" element={<OrderManagement />} />
+        <Route path="/owner/products" element={<ProductManagement />} />
+        <Route path="/owner/userdetails" element={<UserDetails />} />
+        <Route path="/owner/total-revenue" element={<TotalRevenue />} />
+      </Routes>
+
+      <Footer />
+    </BrowserRouter>
   );
-}
+};
 
 export default App;

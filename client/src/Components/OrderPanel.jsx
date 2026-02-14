@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+/*import PropTypes from "prop-types";*/
 
 const SIZES = ["S", "M", "L", "XL"];
 
@@ -56,8 +56,8 @@ const OrderPanel = ({ product, onClose, onAddToCart, onBuyNow }) => {
                     key={s}
                     onClick={() => setSize(s)}
                     className={`rounded-lg border px-4 py-1 transition ${size === s
-                        ? "border-blue-500 bg-blue-500/10 text-blue-400"
-                        : "border-gray-700 text-gray-400 hover:border-gray-500"
+                      ? "border-blue-500 bg-blue-500/10 text-blue-400"
+                      : "border-gray-700 text-gray-400 hover:border-gray-500"
                       }`}
                   >
                     {s}
